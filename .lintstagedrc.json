@@ -1,0 +1,6 @@
+{
+  "*.ts": "eslint",
+  "*.js": "eslint",
+  "*.md": "markdownlint",
+  "*.json": "prettier"
+}

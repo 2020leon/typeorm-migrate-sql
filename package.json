@@ -1,0 +1,57 @@
+{
+  "name": "typeorm-migrate-sql",
+  "version": "0.0.0",
+  "description": "Generate Sql Files and Migrate",
+  "main": "lib/index.js",
+  "types": "types/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "files": [
+    "/lib",
+    "/types"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepack": "rm -rf lib types && tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"./**/*.json\"",
+    "lint": "eslint --ext .ts src/",
+    "lint:fix": "eslint --ext .ts src/ --fix",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^8.0.1",
+    "markdownlint-cli": "^0.32.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  },
+  "keywords": [
+    "typeorm",
+    "migrate",
+    "sql",
+    "migration",
+    "migrations",
+    "db-migrate",
+    "cli",
+    "database",
+    "db",
+    "mysql",
+    "mariadb"
+  ],
+  "author": "2020leon <leon2000.tw@gmail.com>",
+  "homepage": "https://github.com/2020leon/typeorm-migrate-sql",
+  "repository": "github:2020leon/typeorm-migrate-sql",
+  "license": "MIT"
+}
