@@ -2,5 +2,6 @@
   "*.ts": "eslint",
   "*.js": "eslint",
   "*.md": "markdownlint",
+  "*.sh": "shellcheck",
   "*.json": "prettier"
 }
