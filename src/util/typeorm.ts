@@ -51,21 +51,22 @@ export function tableNameToTable(
   return dataSource.driver.buildTableName(tableName, schema, database);
 }
 
-export async function getVersionFromDb(
+export async function getVersionAndSuccessFromDb(
   dataSource: DataSource,
   type: SupportedDb,
   migrationsTableName: string,
-): Promise<bigint> {
+): Promise<[bigint, boolean]> {
   const queryRunner = dataSource.createQueryRunner();
   if ((type as string) === 'mongodb') {
     throw new Error('TODO: not implemented');
   } else {
     const migrationsTable = tableNameToTable(dataSource, migrationsTableName);
     const tableExist = await queryRunner.hasTable(migrationsTableName);
-    if (!tableExist) return BigInt(-1);
+    if (!tableExist) return [BigInt(-1), false];
     const result = await dataSource.manager
       .createQueryBuilder(queryRunner)
       .select('version')
+      .addSelect('success')
       .from(migrationsTable, migrationsTableName)
       .where(
         (queryBuilder) =>
@@ -76,6 +77,12 @@ export async function getVersionFromDb(
             .getQuery()}`,
       )
       .getRawOne();
-    return BigInt(result && result.version !== null ? result.version : -1);
+
+    return result
+      ? [
+          BigInt(result.version !== null ? result.version : -1),
+          !!result.success,
+        ]
+      : [BigInt(-1), true];
   }
 }

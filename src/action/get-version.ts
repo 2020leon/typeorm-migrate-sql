@@ -1,5 +1,5 @@
 import { getIndexOfStems, getStemOfFiles } from '../util/fs';
-import { getDataSource, getVersionFromDb } from '../util/typeorm';
+import { getDataSource, getVersionAndSuccessFromDb } from '../util/typeorm';
 import SupportedDb from '../metadata/supported-db';
 import logger from '../logger';
 
@@ -20,9 +20,10 @@ export default async function getVersion(
     await dataSource.initialize();
 
     let version = BigInt(-1);
+    let success = false;
 
     try {
-      version = await getVersionFromDb(
+      [version, success] = await getVersionAndSuccessFromDb(
         dataSource,
         options.type,
         options.migrationsTableName,
@@ -34,6 +35,9 @@ export default async function getVersion(
     if (version < 0) {
       logger.warn('warn: no version found');
       return;
+    }
+    if (!success) {
+      logger.warn('warn: the last migration is not success');
     }
 
     const [upUnionDown, upMinusDown, downMinusUp] = getStemOfFiles(options.dir);

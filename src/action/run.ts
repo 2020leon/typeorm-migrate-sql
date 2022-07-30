@@ -6,7 +6,7 @@ import { DataSource, Table } from 'typeorm';
 import { getIndexOfStems, getPrefixDigits, getStemOfFiles } from '../util/fs';
 import {
   getDataSource,
-  getVersionFromDb,
+  getVersionAndSuccessFromDb,
   tableNameToTable,
 } from '../util/typeorm';
 import TypeormMigrateSqlError from '../error/typeorm-migrate-sql-error';
@@ -183,13 +183,19 @@ export default async function run(
     await dataSource.initialize();
 
     let version = BigInt(-1);
+    let success = false;
 
     try {
-      version = await getVersionFromDb(
+      [version, success] = await getVersionAndSuccessFromDb(
         dataSource,
         options.type,
         options.migrationsTableName,
       );
+      if (version >= 0 && !success) {
+        throw new TypeormMigrateSqlError(
+          'the last migration is not success, please cleanup db and run again',
+        );
+      }
 
       const [upUnionDown, upMinusDown, downMinusUp] = getStemOfFiles(
         options.dir,
