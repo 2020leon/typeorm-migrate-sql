@@ -1,6 +1,6 @@
 {
   "name": "typeorm-migrate-sql",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Generate Sql Files and Migrate",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
