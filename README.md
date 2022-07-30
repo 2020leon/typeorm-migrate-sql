@@ -12,12 +12,12 @@ and runs those generated migrations.
 
 ## Requirements
 
-| Engine/Package         | Version  | Optional |
-|------------------------|----------|----------|
-| Node.js                | >=12.9.0 |          |
-| [TypeORM][typeorm]     | ^0.3.0   |          |
-| [Node MySQL 2][mysql2] | ^2.2.5   |          |
-| [ts-node][ts-node]     | ^10.7.0  | true     |
+| Engine/Package         | Version          | Optional |
+|------------------------|------------------|----------|
+| Node.js                | ^12.20.0 or >=14 |          |
+| [TypeORM][typeorm]     | ^0.3.0           |          |
+| [Node MySQL 2][mysql2] | ^2.2.5           |          |
+| [ts-node][ts-node]     | ^10.7.0          | true     |
 
 ## Installation
 
@@ -97,7 +97,8 @@ npx typeorm-migrate-sql goto my_schema 1637690400000
 
 These commands run migrations to a version. `up` applies an up migration, `down`
 applies a down migration, while `goto` migrates to the specific version.
-Similarly, options can be set via cli.
+Similarly, options can be set via cli. Note that if the last migration failed,
+these commands will also fail.
 
 ## Inspiration
 
