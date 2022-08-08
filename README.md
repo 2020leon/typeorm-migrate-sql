@@ -29,7 +29,7 @@ npm i typeorm-migrate-sql
 # yarn
 yarn add typeorm-migrate-sql
 # pnpm
-pnpm i typeorm-migrate-sql
+pnpm add typeorm-migrate-sql
 ```
 
 ## Usage
