@@ -34,6 +34,8 @@ export default async function getVersion(
 
     if (version < 0) {
       logger.warn('warn: no version found');
+      logger.warn('warn: you may not have migrated the database via the tool');
+      logger.warn('warn: or name of the migration table is wrong');
       return;
     }
     if (!success) {
