@@ -14,9 +14,9 @@ and runs those generated migrations.
 
 | Engine/Package         | Version          | Optional |
 |------------------------|------------------|----------|
-| Node.js                | ^12.20.0 or >=14 |          |
-| [TypeORM][typeorm]     | ^0.3.0           |          |
-| [Node MySQL 2][mysql2] | ^2.2.5           |          |
+| Node.js                | >=14             |          |
+| [TypeORM][typeorm]     | ^0.3.12          |          |
+| [Node MySQL 2][mysql2] | ^2.2.5 or ^3.0.1 |          |
 | [ts-node][ts-node]     | ^10.7.0          | true     |
 
 ## Installation
@@ -86,7 +86,9 @@ npx typeorm-migrate-sql version my_schema
 ```
 
 The command gets current migration version recorded in the database. Connection
-and some other options can be set via cli options.
+and some other options can be set via cli options. If you have never migrated
+the database before or the name of migration table is wrong, the version will
+not be found or defined.
 
 #### Run Migrations
 
