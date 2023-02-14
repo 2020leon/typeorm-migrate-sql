@@ -17,7 +17,7 @@ function parseQueryAndParams(
   params?: readonly (string | object | number | boolean)[],
 ): string {
   let _sql = sql;
-  if (params && params.length) {
+  if (params?.length) {
     params.forEach((value) => {
       if (typeof value === 'string') {
         _sql = _sql.replace('?', `"${value}"`);

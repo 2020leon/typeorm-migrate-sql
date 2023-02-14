@@ -28,7 +28,7 @@ export async function askPasswordIfNeeded(options: {
   readonly password?: string;
 }): Promise<string> {
   if (options.type === 'sqlite' || options.password)
-    return options.password || '';
+    return options.password ?? '';
   return new Promise<string>((resolve) => {
     let muted = false;
     const rl = readline.createInterface({
@@ -140,9 +140,9 @@ export function registerCommand(
 
   const command = program.command(commandName).description(description);
   args.forEach((key) => command.addArgument(_args[key]()));
-  Object.entries(options)
-    .filter(([, value]) => value)
-    .forEach(([key]) => command.addOption(_options[key as OptionKeys]()));
+  Object.keys(options).forEach((key) =>
+    command.addOption(_options[key as OptionKeys]()),
+  );
   command.action(action);
   return program;
 }
