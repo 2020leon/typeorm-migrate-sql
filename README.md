@@ -45,8 +45,10 @@ npx typeorm-migrate-sql help
 We recommend that you add the following to `package.json` for convenience.
 
 ```json
-"scripts": {
-  "migrate": "typeorm-migrate-sql"
+{
+  "scripts": {
+    "migrate": "typeorm-migrate-sql"
+  }
 }
 ```
 
